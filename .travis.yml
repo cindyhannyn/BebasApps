@@ -13,15 +13,18 @@ branches :
     - master #-> QA/Staging server
     - develop #-> DevServer
 
-#install enviroment di OS
-before_install:
-- curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-- chmod +x ./kubectl #permisions
-- sudo mv ./kubectl/usr/local/bin/kubectl # Move to presisten
-# Precompile
-before_script:
 
-# Hain Execution (Build)
+# build
+before_script:
+  - cp.env.travis .env
+  - composer install --no-interaction
+  - php artisan key:generate
+
+# test
 script :
+  - ./vendor/bin/phpunit
+
+#develoy
+after_success :
 
 
