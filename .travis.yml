@@ -16,7 +16,7 @@ branches :
 
 # build
 before_script:
-  - cp.env.travis .env
+  - cp .env.travis .env
   - composer install --no-interaction
   - php artisan key:generate
 
